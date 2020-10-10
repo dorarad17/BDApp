@@ -1,5 +1,10 @@
 package com.BD.attendees;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Attendee {
 
     public String id;
@@ -16,6 +21,8 @@ public class Attendee {
         this.lastName = lastName;
     }
 
+    @Id
+    @GeneratedValue
     public String getId() {
         return id;
     }
