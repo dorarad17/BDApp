@@ -2,7 +2,7 @@ package com.BD.attendees;
 
 public class Attendee {
 
-    public String id;
+    public int id;
     public String firstName;
     public String lastName;
 
@@ -10,17 +10,17 @@ public class Attendee {
 
     }
 
-    public Attendee(String id, String firstName, String lastName) {
+    public Attendee(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
