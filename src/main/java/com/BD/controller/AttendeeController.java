@@ -5,29 +5,28 @@ import com.BD.attendees.AttendeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class AttendeeController {
 
     @Autowired
     private AttendeeService attendeeService;
-   // @Autowired
-   // private AttendeeRepository attendeeRepository;
 
     @RequestMapping("/attendees")
-    public void allAttendees() {
-//        return attendeeRepository.findAll();
-
+    public List<Attendee> allAttendees() {
+       return attendeeService.getAllAttendees();
     }
 
     @RequestMapping("/attendees/{id}")
-    public void getAttendee(@PathVariable String id) {
-//        return attendeeRepository.getAttendee(id);
+    public Attendee getAttendee(@PathVariable("id") int id) {
+            return attendeeService.getAttendee(id);
     }
 
     @PostMapping(value = "/attendees")
-    public void addAttendee(@RequestBody Attendee attendee){
-//        attendeeRepository.save(attendee);
-//        return attendeeRepository.getAttendee(attendee.getId());
+    public String addAttendee(@RequestBody Attendee attendee){
+        attendeeService.addAttendee(attendee);
+        return attendee.getFirstName();
     }
 
 //    @RequestMapping(method = RequestMethod.PUT, value = "/attendees/{id}")
