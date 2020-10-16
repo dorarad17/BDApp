@@ -7,6 +7,8 @@ import javax.persistence.Id;
 @Entity
 public class Attendee {
 
+    @Id
+    @GeneratedValue
     public String id;
     public String firstName;
     public String lastName;
@@ -21,8 +23,6 @@ public class Attendee {
         this.lastName = lastName;
     }
 
-    @Id
-    @GeneratedValue
     public String getId() {
         return id;
     }

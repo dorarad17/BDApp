@@ -2,35 +2,32 @@ package com.BD.controller;
 
 import com.BD.attendees.Attendee;
 import com.BD.attendees.AttendeeService;
-import com.BD.repository.AttendeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 public class AttendeeController {
 
     @Autowired
     private AttendeeService attendeeService;
-    @Autowired
-    private AttendeeRepository attendeeRepository;
+   // @Autowired
+   // private AttendeeRepository attendeeRepository;
 
     @RequestMapping("/attendees")
-    public List<Attendee> allAttendees() {
-        return attendeeRepository.findAll();
+    public void allAttendees() {
+//        return attendeeRepository.findAll();
+
     }
 
     @RequestMapping("/attendees/{id}")
-    public Attendee getAttendee(@PathVariable String id) {
-        return attendeeRepository.getAttendee(id);
+    public void getAttendee(@PathVariable String id) {
+//        return attendeeRepository.getAttendee(id);
     }
 
     @PostMapping(value = "/attendees")
-    public Attendee addAttendee(@RequestBody Attendee attendee){
-        attendeeRepository.save(attendee);
-        return attendeeRepository.getAttendee(attendee.getId());
+    public void addAttendee(@RequestBody Attendee attendee){
+//        attendeeRepository.save(attendee);
+//        return attendeeRepository.getAttendee(attendee.getId());
     }
 
 //    @RequestMapping(method = RequestMethod.PUT, value = "/attendees/{id}")
