@@ -33,11 +33,14 @@ public class AttendeeService {
         attendeeRepository.save(attendee);
     }
 
-//    public void updateAttendee(String id, Attendee attendee) {
-//        attendeeRepository.save(id,)
-//    }
+    public void updateAttendee(int id, Attendee attendee) {
+        Attendee attendeeInDB = attendeeRepository.findById(id).get();
+        attendeeInDB.setFirstName(attendee.firstName);
+        attendeeInDB.setLastName(attendee.lastName);
+        attendeeRepository.save(attendeeInDB);
+    }
 
-//    public void deleteAttendee(String id) {
-//        attendees.removeIf(a -> a.getId().equals(id));
-//    }
+    public void deleteAttendee(int id) {
+        attendeeRepository.deleteById(id);
+    }
 }

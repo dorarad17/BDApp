@@ -29,13 +29,15 @@ public class AttendeeController {
         return attendee.getFirstName();
     }
 
-//    @RequestMapping(method = RequestMethod.PUT, value = "/attendees/{id}")
-//    public void updateAttendee(@RequestBody Attendee attendee,@PathVariable String id){
-//        attendeeService.updateAttendee(id,attendee);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/attendees/{id}")
-//    public void deleteAttendee(@PathVariable String id){
-//        attendeeService.deleteAttendee(id);
-//    }
+    @RequestMapping(method = RequestMethod.PUT, value = "/attendees/{id}")
+    public String updateAttendee(@RequestBody Attendee attendee,@PathVariable int id){
+        attendeeService.updateAttendee(id,attendee);
+        return "updated";
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/attendees/{id}")
+    public String deleteAttendee(@PathVariable int id){
+        attendeeService.deleteAttendee(id);
+        return "deleted";
+    }
 }
