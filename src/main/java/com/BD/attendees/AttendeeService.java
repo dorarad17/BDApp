@@ -13,12 +13,6 @@ public class AttendeeService {
     @Autowired
     AttendeeRepository attendeeRepository;
 
-    private List<Attendee> attendees = new ArrayList<>(Arrays.asList(
-                new Attendee(0001,"Liam","Shove"),
-                new Attendee(0002,"Dora","Radosevic"),
-                new Attendee(0003,"Gary","Z")));
-
-
     public List<Attendee> getAllAttendees(){
         List<Attendee> attendees = new ArrayList<Attendee>();
         attendeeRepository.findAll().forEach(attendee -> attendees.add(attendee));
