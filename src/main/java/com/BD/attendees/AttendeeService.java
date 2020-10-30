@@ -3,9 +3,16 @@ package com.BD.attendees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 @Service
 public class AttendeeService {
@@ -37,4 +44,5 @@ public class AttendeeService {
     public void deleteAttendee(int id) {
         attendeeRepository.deleteById(id);
     }
+
 }
