@@ -1,7 +1,14 @@
 package com.BD.attendees;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Attendee {
 
+    @Id
+    @GeneratedValue
     public int id;
     public String firstName;
     public String lastName;

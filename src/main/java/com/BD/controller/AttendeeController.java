@@ -5,7 +5,6 @@ import com.BD.attendees.AttendeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -16,26 +15,30 @@ public class AttendeeController {
 
     @RequestMapping("/attendees")
     public List<Attendee> allAttendees() {
-        return attendeeService.getAllAttendees();
+       return attendeeService.getAllAttendees();
     }
 
     @RequestMapping("/attendees/{id}")
-    public Attendee getAttendee(@PathVariable int id) {
-        return attendeeService.getAttendee(id);
+
+    public Attendee getAttendee(@PathVariable("id") int id) {
+            return attendeeService.getAttendee(id);
     }
 
-//    @RequestMapping(method = RequestMethod.POST, value = "/attendees")
-//    public void addAttendee(@RequestBody Attendee attendee){
-//        attendeeService.addAttendee(attendee);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.PUT, value = "/attendees/{id}")
-//    public void updateAttendee(@RequestBody Attendee attendee,@PathVariable String id){
-//        attendeeService.updateAttendee(id,attendee);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/attendees/{id}")
-//    public void deleteAttendee(@PathVariable String id){
-//        attendeeService.deleteAttendee(id);
-//    }
+    @PostMapping(value = "/attendees")
+    public String addAttendee(@RequestBody Attendee attendee){
+        attendeeService.addAttendee(attendee);
+        return attendee.getFirstName();
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/attendees/{id}")
+    public String updateAttendee(@RequestBody Attendee attendee,@PathVariable int id){
+        attendeeService.updateAttendee(id,attendee);
+        return "updated";
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/attendees/{id}")
+    public String deleteAttendee(@PathVariable int id){
+        attendeeService.deleteAttendee(id);
+        return "deleted";
+    }
 }
