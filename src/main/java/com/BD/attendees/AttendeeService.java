@@ -4,10 +4,8 @@ import com.BD.exceptions.AttendeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -19,7 +17,7 @@ public class AttendeeService {
 
     public List<Attendee> getAllAttendees(){
         List<Attendee> attendees = new ArrayList<>();
-        attendeeRepository.findAll().forEach(attendee -> attendees.add(attendee));
+        attendeeRepository.findAll().forEach(attendees::add);
         return attendees;
     }
 
