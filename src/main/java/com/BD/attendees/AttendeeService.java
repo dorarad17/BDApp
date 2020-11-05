@@ -1,18 +1,15 @@
 package com.BD.attendees;
 
+import com.BD.exceptions.AttendeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 
 @Service
 public class AttendeeService {
@@ -21,13 +18,19 @@ public class AttendeeService {
     AttendeeRepository attendeeRepository;
 
     public List<Attendee> getAllAttendees(){
-        List<Attendee> attendees = new ArrayList<Attendee>();
+        List<Attendee> attendees = new ArrayList<>();
         attendeeRepository.findAll().forEach(attendee -> attendees.add(attendee));
         return attendees;
     }
 
-    public Attendee getAttendee(int id){
-        return attendeeRepository.findById(id).get();
+    public Attendee getAttendee(int id)  {
+        Optional<Attendee> attendeeInDB = attendeeRepository.findById(id);
+        if (attendeeInDB.isEmpty()) {
+            throw new AttendeeNotFoundException("Cannot find Attendee with id: " + id);
+        }
+        else {
+            return attendeeInDB.get();
+        }
     }
 
     public void addAttendee(Attendee attendee) {
@@ -35,14 +38,26 @@ public class AttendeeService {
     }
 
     public void updateAttendee(int id, Attendee attendee) {
-        Attendee attendeeInDB = attendeeRepository.findById(id).get();
-        attendeeInDB.setFirstName(attendee.firstName);
-        attendeeInDB.setLastName(attendee.lastName);
-        attendeeRepository.save(attendeeInDB);
+        Optional <Attendee> attendeeInDB = attendeeRepository.findById(id);
+        if (attendeeInDB.isEmpty()) {
+            throw new AttendeeNotFoundException("Cannot find Attendee with id: " + id);
+        }
+        else {
+            Attendee attendeeToUpdate = attendeeInDB.get();
+            attendeeToUpdate.setFirstName(attendee.firstName);
+            attendeeToUpdate.setLastName(attendee.lastName);
+            attendeeRepository.save(attendeeToUpdate);
+        }
     }
 
     public void deleteAttendee(int id) {
-        attendeeRepository.deleteById(id);
+        Optional<Attendee> attendeeInDB = attendeeRepository.findById(id);
+        if (attendeeInDB.isEmpty()) {
+            throw new AttendeeNotFoundException("Cannot find Attendee with id: " + id);
+        }
+        else {
+            attendeeRepository.deleteById(id);
+        }
     }
 
 }
