@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -37,6 +38,12 @@ public class AttendeeService {
 
     public void deleteAttendee(int id) {
         attendeeRepository.deleteById(id);
+    }
+
+    public List<Attendee> getAttendingList () {
+        List <Attendee> allAttendees = getAllAttendees();
+        return allAttendees.stream()
+                .filter(Attendee::getAttending).collect(Collectors.toList());
     }
 
 }
