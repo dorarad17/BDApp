@@ -12,15 +12,17 @@ public class Attendee {
     public int id;
     public String firstName;
     public String lastName;
+    public Boolean attending;
 
     public Attendee(){
 
     }
 
-    public Attendee(int id, String firstName, String lastName) {
+    public Attendee(int id, String firstName, String lastName, Boolean attending) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.attending = attending;
     }
 
     public int getId() {
@@ -46,4 +48,8 @@ public class Attendee {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Boolean getAttending() { return attending; }
+
+    public void setAttending(Boolean attending) { this.attending = attending; }
 }
