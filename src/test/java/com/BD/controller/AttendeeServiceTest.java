@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AttendeeServiceTest {
 
-    private final static Attendee ATTENDEE1 = new Attendee(1,"Dora","Radosevic",true);
-    private final static Attendee ATTENDEE2 = new Attendee(2,"Liam","Shove",false);
+    private final static Attendee ATTENDEE1 = new Attendee(1,"Dora","Radosevic",true,"d@mail.com");
+    private final static Attendee ATTENDEE2 = new Attendee(2,"Liam","Shove",false,"l@mail.com");
     private final static List<Attendee> ATTENDEES = Arrays.asList(ATTENDEE1,ATTENDEE2);
 
     @Test

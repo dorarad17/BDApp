@@ -15,7 +15,7 @@ public class AttendeeService {
     AttendeeRepository attendeeRepository;
 
     public List<Attendee> getAllAttendees(){
-        List<Attendee> attendees = new ArrayList<Attendee>();
+        List<Attendee> attendees = new ArrayList<>();
         attendeeRepository.findAll().forEach(attendees::add);
         return attendees;
     }
@@ -33,6 +33,7 @@ public class AttendeeService {
         attendeeInDB.setFirstName(attendee.firstName);
         attendeeInDB.setLastName(attendee.lastName);
         attendeeInDB.setAttending(attendee.attending);
+        attendeeInDB.setEmail(attendee.email);
         attendeeRepository.save(attendeeInDB);
     }
 

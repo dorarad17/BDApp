@@ -19,7 +19,6 @@ public class AttendeeController {
     }
 
     @RequestMapping("/attendees/{id}")
-
     public Attendee getAttendee(@PathVariable("id") int id) {
             return attendeeService.getAttendee(id);
     }
