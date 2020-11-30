@@ -45,4 +45,8 @@ public class AttendeeService {
                 .filter(Attendee::getAttending).collect(Collectors.toList());
     }
 
+    public static String getFullName (Attendee attendee) {
+        return attendee.firstName + " " + attendee.lastName;
+    }
+
 }
