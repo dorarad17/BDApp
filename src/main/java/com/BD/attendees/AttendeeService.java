@@ -40,7 +40,7 @@ public class AttendeeService {
         attendeeRepository.deleteById(id);
     }
 
-    public List<Attendee> getAttendingList (List <Attendee> attendees) {
+    public static List<Attendee> getAttendingList (List <Attendee> attendees) {
         return attendees.stream()
                 .filter(Attendee::getAttending).collect(Collectors.toList());
     }
