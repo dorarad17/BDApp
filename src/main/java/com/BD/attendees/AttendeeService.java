@@ -1,10 +1,14 @@
 package com.BD.attendees;
 
+import com.BD.exceptions.AttendeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -20,8 +24,14 @@ public class AttendeeService {
         return attendees;
     }
 
-    public Attendee getAttendee(int id){
-        return attendeeRepository.findById(id).get();
+    public Attendee getAttendee(int id)  {
+        Optional<Attendee> attendeeInDB = attendeeRepository.findById(id);
+        if (attendeeInDB.isEmpty()) {
+            throw new AttendeeNotFoundException("Cannot find Attendee with id: " + id);
+        }
+        else {
+            return attendeeInDB.get();
+        }
     }
 
     public void addAttendee(Attendee attendee) {
@@ -29,16 +39,29 @@ public class AttendeeService {
     }
 
     public void updateAttendee(int id, Attendee attendee) {
+
+        Optional <Attendee> attendeeInDB = attendeeRepository.findById(id);
+        if (attendeeInDB.isEmpty()) {
+            throw new AttendeeNotFoundException("Cannot find Attendee with id: " + id);
+        }
+        else {
         Attendee attendeeInDB = attendeeRepository.findById(id).get();
         attendeeInDB.setFirstName(attendee.firstName);
         attendeeInDB.setLastName(attendee.lastName);
         attendeeInDB.setAttending(attendee.attending);
         attendeeInDB.setEmail(attendee.email);
         attendeeRepository.save(attendeeInDB);
+        }
     }
 
     public void deleteAttendee(int id) {
-        attendeeRepository.deleteById(id);
+        Optional<Attendee> attendeeInDB = attendeeRepository.findById(id);
+        if (attendeeInDB.isEmpty()) {
+            throw new AttendeeNotFoundException("Cannot find Attendee with id: " + id);
+        }
+        else {
+            attendeeRepository.deleteById(id);
+        }
     }
 
     public static List<Attendee> getAttendingList (List <Attendee> attendees) {
