@@ -40,12 +40,12 @@ public class AttendeeService {
 
     public void updateAttendee(int id, Attendee attendee) {
 
-        Optional <Attendee> attendeeInDB = attendeeRepository.findById(id);
-        if (attendeeInDB.isEmpty()) {
+        Optional <Attendee> findAttendee = attendeeRepository.findById(id);
+        if (findAttendee.isEmpty()) {
             throw new AttendeeNotFoundException("Cannot find Attendee with id: " + id);
         }
         else {
-        Attendee attendeeInDB = attendeeRepository.findById(id).get();
+        Attendee attendeeInDB = findAttendee.get();
         attendeeInDB.setFirstName(attendee.firstName);
         attendeeInDB.setLastName(attendee.lastName);
         attendeeInDB.setAttending(attendee.attending);
