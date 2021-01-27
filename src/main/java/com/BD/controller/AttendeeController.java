@@ -23,6 +23,7 @@ public class AttendeeController {
             return attendeeService.getAttendee(id);
     }
 
+    @CrossOrigin // do I want all origins allowed?!
     @PostMapping(value = "/attendees")
     public String addAttendee(@RequestBody Attendee attendee){
         attendeeService.addAttendee(attendee);
